@@ -17,7 +17,7 @@ def clear_console():
 CHAR_WIDTH = 12
 CHAR_HEIGHT = 10
 
-# List containing ASCII art for A-Z and 0-9 sequentially (total 36 elements)
+# List containing ASCII art for A-Z, a-z and 0-9 sequentially (total 62 elements)
 ascii_chars = [
     # A
     ["     A     ","    A A    ","   A   A   ","  AAAAAAA  ","  A     A  "," A       A "," A       A ","           ","           ","           "],
@@ -71,6 +71,58 @@ ascii_chars = [
     [" Y     Y ","  Y   Y  ","   Y Y   ","    Y    ","    Y    ","    Y    ","    Y    ","         ","         ","         "],
     # Z
     [" ZZZZZZZ ","      Z  ","     Z   ","    Z    ","   Z     ","  Z      "," ZZZZZZZ ","         ","         ","         "],
+    # a
+    ["         ","         ","  aaaa   "," a    a  "," a    a  "," a    a  ","  aaaa   ","         ","         ","         "],
+    # b
+    [" b       "," b       "," bbbbb   "," b    b  "," b    b  "," b    b  "," bbbbb   ","         ","         ","         "],
+    # c
+    ["         ","         ","  cccc   "," c       "," c       "," c       ","  cccc   ","         ","         ","         "],
+    # d
+    ["       d ","       d "," ddddd   "," d    d  "," d    d  "," d    d  "," ddddd   ","         ","         ","         "],
+    # e
+    ["         ","         ","  eeee   "," e    e  "," eeeee   "," e       ","  eeee   ","         ","         ","         "],
+    # f
+    ["   fff   ","  f      "," fffff   ","  f      ","  f      ","  f      ","  f      ","         ","         ","         "],
+    # g
+    ["         "," ggggg   "," g    g  "," g    g  "," ggggg   ","      g  "," gggg    ","         ","         ","         "],
+    # h
+    [" h       "," h       "," hhhh    "," h    h  "," h    h  "," h    h  "," h    h  ","         ","         ","         "],
+    # i
+    ["    i    ","         ","    i    ","    i    ","    i    ","    i    ","   iii   ","         ","         ","         "],
+    # j
+    ["       j ","         ","       j ","       j ","       j "," j    j  ","  jjj    ","         ","         ","         "],
+    # k
+    [" k       "," k       "," k   k   "," k  k    "," kkk     "," k  k    "," k   k   ","         ","         ","         "],
+    # l
+    ["    l    ","    l    ","    l    ","    l    ","    l    ","    l    ","   ll    ","         ","         ","         "],
+    # m
+    ["         ","         "," mmm  m  "," m m m m "," m m m m "," m m m m "," m m m m ","         ","         ","         "],
+    # n
+    ["         ","         "," nnnn    "," n    n  "," n    n  "," n    n  "," n    n  ","         ","         ","         "],
+    # o
+    ["         ","         ","  oooo   "," o    o  "," o    o  "," o    o  ","  oooo   ","         ","         ","         "],
+    # p
+    ["         "," pppp    "," p    p  "," p    p  "," pppp    "," p       "," p       ","         ","         ","         "],
+    # q
+    ["         "," qqqqq   "," q    q  "," q    q  "," qqqqq   ","      q  ","      q  ","         ","         ","         "],
+    # r
+    ["         ","         "," rrr     "," r   r   "," r       "," r       "," r       ","         ","         ","         "],
+    # s
+    ["         ","         ","  ssss   "," s       ","  sss    ","      s  "," sssss   ","         ","         ","         "],
+    # t
+    ["    t    ","    t    "," ttttt   ","    t    ","    t    ","    t    ","     t   ","         ","         ","         "],
+    # u
+    ["         ","         "," u    u  "," u    u  "," u    u  "," u    u  ","  uuuu   ","         ","         ","         "],
+    # v
+    ["         ","         "," v     v ","  v   v  ","  v   v  ","   v v   ","    v    ","         ","         ","         "],
+    # w
+    ["         ","         "," w  w  w "," w  w  w "," w w w w ","  w w w  ","   w     ","         ","         ","         "],
+    # x
+    ["         ","         "," x    x  ","  x  x   ","   xx    ","  x  x   "," x    x  ","         ","         ","         "],
+    # y
+    ["         "," y    y  "," y    y  ","  y  y   ","   yy    ","    y    "," y       ","         ","         ","         "],
+    # z
+    ["         ","         "," zzzzzz  ","     z   ","    z    ","   z     "," zzzzzz  ","         ","         ","         "],
     # 0
     ["  0000  "," 0    0 ","0      0","0      0","0      0","0      0"," 0    0 ","  0000  ","         ","         "],
     # 1
@@ -93,12 +145,14 @@ ascii_chars = [
     ["  9999  "," 9    9 "," 9    9 ","  99999 ","      9 ","      9 ","  9999  ","         ","         ","         "]
 ]
 
-# Mapping characters to index in list
+
 def char_to_index(c):
     if 'A' <= c <= 'Z':
         return ord(c) - ord('A')
+    elif 'a' <= c <= 'z':
+        return ord(c) - ord('a') + 26
     elif '0' <= c <= '9':
-        return ord(c) - ord('0') + 26
+        return ord(c) - ord('0') + 52
     else:
         return None
 
@@ -107,13 +161,58 @@ def show_title():
     print(f"{GREEN}ASCII{YELLOW} ART {WHITE}GENERATOR{RESET}")
     print("="*30)
 
-# Main loop
-while True:
-    clear_console()
-    show_title()
+# Display menu
+def show_menu():
+    print("\n--- Select Display Mode ---")
+    print("1. General Display (Mix of uppercase, lowercase, numbers)")
+    print("2. Single Character Display")
+    print("3. Only Small Characters (lowercase only)")
+    print("4. Exit")
+    choice = input("\nEnter your choice (1-4): ")
+    return choice
+
+# Display single character
+def display_single_char():
+    char = input("\nEnter a single character (A-Z, a-z, 0-9): ")
+    if len(char) > 1:
+        print("Please enter only one character!")
+        return
     
-    name = input("Enter your name (A-Z, 0-9 only): ").upper()
+    idx = char_to_index(char)
+    if idx is not None:
+        print()
+        for row in range(CHAR_HEIGHT):
+            print(ascii_chars[idx][row])
+    else:
+        print(f"Character '{char}' not supported!")
+
+# Display only lowercase characters
+def display_small_chars():
+    text = input("\nEnter text (a-z only): ").lower()
     
+    # Filter only lowercase letters
+    filtered_text = ''.join([c for c in text if 'a' <= c <= 'z'])
+    
+    if not filtered_text:
+        print("No valid lowercase characters found!")
+        return
+    
+    print()
+    for row in range(CHAR_HEIGHT):
+        line = ""
+        for char in filtered_text:
+            idx = char_to_index(char)
+            if idx is not None:
+                line += ascii_chars[idx][row] + "  "
+            else:
+                line += " " * CHAR_WIDTH + "  "
+        print(line)
+
+# Display general (mixed) characters
+def display_general():
+    name = input("\nEnter your name (A-Z, a-z, 0-9 allowed): ")
+    
+    print()
     for row in range(CHAR_HEIGHT):
         line = ""
         for char in name:
@@ -123,7 +222,27 @@ while True:
             else:
                 line += " " * CHAR_WIDTH + "  "
         print(line)
+
+# Main loop
+while True:
+    clear_console()
+    show_title()
     
-    cont = input("\nDo you want to continue? (y/n): ").lower()
-    if cont != 'y':
+    choice = show_menu()
+    
+    if choice == '1':
+        display_general()
+    elif choice == '2':
+        display_single_char()
+    elif choice == '3':
+        display_small_chars()
+    elif choice == '4':
+        print("\nThanks for using ASCII Art Generator!")
         break
+    else:
+        print("Invalid choice! Please select 1-4.")
+    
+    if choice in ['1', '2', '3']:
+        cont = input("\nDo you want to continue? (y/n): ").lower()
+        if cont != 'y':
+            break
